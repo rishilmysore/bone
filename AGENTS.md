@@ -1,0 +1,70 @@
+# <Project> <!-- TODO -->
+
+<!-- marrow v0 -->
+<!-- TODO: one paragraph — what this is, who it's for, the one thing that must never break. -->
+
+Agent conventions for this repo. STATE.md holds current focus; DECISIONS.md holds decision provenance; plans/ holds in-flight work, plans/archive/ closed work. This file states the current binding rules — if it disagrees with a newer DECISIONS.md line, this file is stale: fix it.
+
+## Session
+
+- Start: read this file, then STATE.md; resume its Next action unless told otherwise.
+- Context diet: planning adds DECISIONS.md; executing adds the one plan. plans/archive/ is history — dig only on purpose.
+- Blocked, or scope has doubled? Write a STATE.md blocker and ask.
+- Parallel work: one plan per worktree; STATE.md In flight lists them all. Closeouts land serially; DECISIONS.md append conflicts resolve as keep-both.
+
+## The loop
+
+classify → plan → execute → verify → distill (CLOSEOUT.md). Ceremony scales by class, never by adding commands.
+
+- `trivial` — edit + verify inline; no plan; evidence goes in the commit message.
+- `multi-file` — copy plans/_TEMPLATE.md → plans/<slug>.md and list it in STATE.md In flight. Plan in a fresh context; execute in another. The plan is the entire handoff — commit it before executing.
+- `risky-novel` — as multi-file, plus fill Spec before Tasks. Qualifies: new external surface (API, schema, dependency), irreversible data change, security-sensitive, or nothing in the repo to pattern-match against.
+- Reclassify upward the moment a task outgrows its class: a `trivial` that touches a second file or fails verification once is `multi-file` — stop and write the plan. A `multi-file` that turns out `risky-novel` mid-execution: stop before the next task, revert uncommitted work, fill Spec retroactively — or abandon per CLOSEOUT and replan.
+- Too big for one plan: split into independently verifiable plans; sequence them in STATE.md Next action.
+
+## Commands
+
+| Action | Command |
+|---|---|
+| Install | <!-- TODO --> |
+| Typecheck / lint | <!-- TODO --> |
+| Unit tests | <!-- TODO --> |
+| Run locally | <!-- TODO --> |
+| Build / package | <!-- TODO --> |
+
+## Verification
+
+What constitutes **proof** that a change works. Claiming "done" requires running these and showing the output.
+
+- Fast gate (every change): <!-- TODO: e.g. `npm run typecheck && npm test` -->
+- Behavior proof (feature work): <!-- TODO: how to drive the real flow — e2e suite, smoke script, or manual steps -->
+- Evidence lands in the plan's Verify table — pasted output or a screenshot for UI — secrets redacted. A test written for this change proves it by failing before and passing after; a test that never failed proves nothing.
+
+## Environment
+
+Quirks that cost sessions to rediscover. Update the moment you hit one.
+
+- <!-- TODO: e.g. "e2e cannot run in WSL2 — Chromium SIGTRAPs; run on CI macos-14 instead" -->
+
+## Conventions
+
+- Style: <!-- TODO: formatter/linter + the 2–3 norms tooling can't enforce -->
+- Commits: one atomic commit per task, imperative mood. Docs (STATE.md, DECISIONS.md, plans/) are committed like code.
+- Comments: only for constraints the code cannot express.
+- Bugfix: failing test first, then the fix.
+- Debugging: reproduce → hypothesize → instrument → fix. Three failed fixes on one symptom → stop and write a plan.
+- Dependencies: verify a new one exists in its registry — exact name, current version — before adding it; invented package names are an attack surface.
+- History lives in git; docs describe the present. No document restates another — derive, don't copy.
+- Vendor what you adopt: no third-party skill packs at runtime — copy in, pin, review once.
+
+## Design (UI repos — delete otherwise)
+
+- Tokens: <!-- TODO: type scale, spacing unit, palette source -->
+- Bar for any shipped UI: keyboard-reachable, responsive at common widths, light + dark themes, loading/empty/error states designed, no layout shift on load.
+- Verify against rendered output: a UI-affecting change's evidence is a screenshot or rendered artifact — the agent looked at the page; where the harness cannot render, the Verify row names what stood in for eyes.
+
+## Boundaries
+
+What agents must not do here.
+
+- <!-- TODO: e.g. never push without being asked; secrets live in X, never in code or docs; never touch generated/ -->
