@@ -47,7 +47,7 @@ Quirks that cost sessions to rediscover. Update the moment you hit one.
 
 ## Conventions
 
-- Style: <!-- TODO: formatter/linter + the 2–3 norms tooling can't enforce -->
+- Style: evals/ runtime code is stdlib-only Python (pytest+pyyaml live in the test harness, never in evaluators.py); shell stays POSIX sh; fixtures stay minimal — one defect per bad state.
 - Commits: one atomic commit per task, imperative mood. Docs (STATE.md, DECISIONS.md, plans/) are committed like code.
 - Comments: only for constraints the code cannot express.
 - Bugfix: failing test first, then the fix.

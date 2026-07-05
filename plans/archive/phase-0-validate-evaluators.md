@@ -44,16 +44,16 @@ Fixtures: F1 `pytest-exit` (passing vs failing suite) · F2 `fresh-verify-defect
 2. [x] `evals/fixtures/` — F1–F5 exactly as the matrix specifies.
 3. [x] `evals/datasets/*.yaml` (4 files, 17 cases, pydantic-evals case shape) + `evals/test_discrimination.py` (YAML-driven runner + `test_acceptance_criterion` meta-test). Suite green.
 4. [x] Wire `.git/hooks/pre-commit` (marrow-lint + suite); fill AGENTS.md Commands/Verification/Environment rows. The commit itself demonstrates the hook.
-5. [ ] Closeout per CLOSEOUT.md — archive this plan, regenerate STATE.md, ≤3 DECISIONS.md lines.
+5. [x] Closeout per CLOSEOUT.md — archive this plan, regenerate STATE.md, ≤3 DECISIONS.md lines.
 
 ## Verify — the gate: cannot close while any row lacks evidence
 
 | Check | How | Evidence |
 |---|---|---|
-| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | |
-| Discrimination matrix | suite `-v` output: all 17 cases behave per matrix; meta-test enforces criterion | |
-| Fresh-verify defect | on F2/bad: smoke exits 0 while done-check exits ≠0 and claimed artifact absent | |
-| Pre-commit wired | a real commit shows lint + suite running in hook output | |
+| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | "marrow-lint: ok" + "18 passed in 0.74s" — hook output on commit b7055a9, re-run green at every commit since |
+| Discrimination matrix | suite `-v` output: all 17 cases behave per matrix; meta-test enforces criterion | pytest -v: 17 test_discrimination case ids all PASSED + test_acceptance_criterion PASSED (18 total); sabotaging exit_code to always-pass reddened exactly its 2 catch cases (2 failed, 16 passed), restore → 18 passed in 0.64s |
+| Fresh-verify defect | on F2/bad: smoke exits 0 while done-check exits ≠0 and claimed artifact absent | cases smoke-clears-on-bad-tree (exit 0, cleared), done-check-bad-caught-despite-filled-evidence (inner pytest exit 1, caught), claimed-evidence-absent-caught (evidence/run.txt missing, caught) — all PASSED |
+| Pre-commit wired | a real commit shows lint + suite running in hook output | b7055a9 landed through the hook (lint + 18 passed printed pre-commit); sabotaged commit "should never land" was blocked, hook exit 1, HEAD unmoved at b7055a9 |
 
 ## Budget
 
@@ -64,4 +64,6 @@ Tripped → record it here, add a STATE.md blocker, ask before continuing.
 
 Run CLOSEOUT.md. Distilled line(s) destined for DECISIONS.md:
 
-- (filled at close)
+- Vendor marrow v0.2.0 (cd04dd8) incl. adapters/; bone runs marrow's loop on itself.
+- v0 evaluators = 4 deterministic signals, fail-closed; token proxy ceil(utf8_bytes/4); no LLM-judge.
+- Evaluator work must prove it can fail: sabotage→red→restore→green is the behavior proof.
