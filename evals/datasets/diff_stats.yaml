@@ -1,0 +1,20 @@
+# bone evals — diff_stats discrimination cases. Paths are fixture-relative
+# trees diffed via git --no-index; caps are the budget under test.
+evaluator: diff_stats
+cases:
+  - name: focused-fix-clears
+    inputs: {base: diff-budget/base, changed: diff-budget/good, max_files: 2, max_insertions: 15, max_deletions: 15}
+    expected_output: {passed: true}
+    metadata: {fixture: diff-budget}
+  - name: drive-by-rewrite-caught
+    inputs: {base: diff-budget/base, changed: diff-budget/bad, max_files: 2, max_insertions: 15, max_deletions: 15}
+    expected_output: {passed: false}
+    metadata: {fixture: diff-budget}
+  - name: one-line-defect-diff-clears
+    inputs: {base: pytest-exit/good, changed: pytest-exit/bad, max_files: 2, max_insertions: 5, max_deletions: 5}
+    expected_output: {passed: true}
+    metadata: {fixture: pytest-exit}
+  - name: ledger-churn-caught
+    inputs: {base: bone-state/good/.bone, changed: bone-state/bad-bloated-ledger/.bone, max_insertions: 50}
+    expected_output: {passed: false}
+    metadata: {fixture: bone-state}

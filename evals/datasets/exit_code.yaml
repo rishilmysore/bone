@@ -1,0 +1,26 @@
+# bone evals — exit_code discrimination cases. Pydantic-Evals case shape
+# (name/inputs/expected_output/metadata) so the library can enter later via the
+# addition gate; loaded by test_discrimination.py with plain yaml until then.
+# `PY` in cmd is replaced by the running interpreter; trees run as tmp copies.
+evaluator: exit_code
+cases:
+  - name: pytest-good-clears
+    inputs: {tree: pytest-exit/good, cmd: [PY, -m, pytest, -q], expect: 0}
+    expected_output: {passed: true}
+    metadata: {fixture: pytest-exit}
+  - name: pytest-bad-caught
+    inputs: {tree: pytest-exit/bad, cmd: [PY, -m, pytest, -q], expect: 0}
+    expected_output: {passed: false}
+    metadata: {fixture: pytest-exit}
+  - name: done-check-good-clears
+    inputs: {tree: fresh-verify-defect/good, cmd: [PY, -m, pytest, -q], expect: 0}
+    expected_output: {passed: true}
+    metadata: {fixture: fresh-verify-defect}
+  - name: done-check-bad-caught-despite-filled-evidence
+    inputs: {tree: fresh-verify-defect/bad, cmd: [PY, -m, pytest, -q], expect: 0}
+    expected_output: {passed: false}
+    metadata: {fixture: fresh-verify-defect}
+  - name: smoke-clears-on-bad-tree-why-self-approval-was-plausible
+    inputs: {tree: fresh-verify-defect/bad, cmd: [PY, smoke.py], expect: 0}
+    expected_output: {passed: true}
+    metadata: {fixture: fresh-verify-defect}

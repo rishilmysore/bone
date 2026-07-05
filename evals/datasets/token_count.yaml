@@ -1,0 +1,21 @@
+# bone evals — token_count discrimination cases. Proxy: ceil(utf8_bytes/4).
+# Margins are wide on purpose (141 vs 1965 around 600; 110 vs 10071 around
+# 2000) so the verdicts cannot flake on byte-level drift.
+evaluator: token_count
+cases:
+  - name: rules-under-budget-clear
+    inputs: {root: token-budget/good, paths: [RULES.md], max_tokens: 600}
+    expected_output: {passed: true}
+    metadata: {fixture: token-budget}
+  - name: bloated-rules-caught
+    inputs: {root: token-budget/bad, paths: [RULES.md], max_tokens: 600}
+    expected_output: {passed: false}
+    metadata: {fixture: token-budget}
+  - name: ledger-injection-budget-clear
+    inputs: {root: bone-state/good, paths: [.bone/ledger.jsonl], max_tokens: 2000}
+    expected_output: {passed: true}
+    metadata: {fixture: bone-state}
+  - name: bloated-ledger-caught
+    inputs: {root: bone-state/bad-bloated-ledger, paths: [.bone/ledger.jsonl], max_tokens: 2000}
+    expected_output: {passed: false}
+    metadata: {fixture: bone-state}

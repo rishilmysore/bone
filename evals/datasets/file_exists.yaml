@@ -1,0 +1,21 @@
+# bone evals — file_exists discrimination cases. The fresh-verify pair is the
+# deterministic half of Δ1: the bad tree's plan cites evidence/run.txt in a
+# filled Evidence cell, but the artifact was never produced.
+evaluator: file_exists
+cases:
+  - name: claimed-artifacts-present-clear
+    inputs: {root: fresh-verify-defect/good, required: [plans/task.md, evidence/run.txt, slugify.py]}
+    expected_output: {passed: true}
+    metadata: {fixture: fresh-verify-defect}
+  - name: claimed-evidence-absent-caught
+    inputs: {root: fresh-verify-defect/bad, required: [plans/task.md, evidence/run.txt, slugify.py]}
+    expected_output: {passed: false}
+    metadata: {fixture: fresh-verify-defect}
+  - name: state-dir-complete-clear
+    inputs: {root: bone-state/good, required: [.bone/ledger.jsonl, .bone/telemetry.jsonl]}
+    expected_output: {passed: true}
+    metadata: {fixture: bone-state}
+  - name: missing-ledger-caught
+    inputs: {root: bone-state/bad-missing-ledger, required: [.bone/ledger.jsonl, .bone/telemetry.jsonl]}
+    expected_output: {passed: false}
+    metadata: {fixture: bone-state}
