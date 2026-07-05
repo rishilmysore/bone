@@ -1,0 +1,3 @@
+{"task": "demo-001", "attempt": 1, "action": "edit app.py parse_flag bare-form match", "failure": "test_flag_eq_form red", "evidence_ref": "pytest:test_flag_eq_form"}
+{"task": "demo-001", "attempt": 2, "action": "handle --name=value form in parse_flag", "failure": null, "evidence_ref": "pytest:3 passed"}
+{"task": "demo-002", "attempt": 1, "action": "document clamp bounds in docs.md", "failure": null, "evidence_ref": "commit:4b9d21e"}

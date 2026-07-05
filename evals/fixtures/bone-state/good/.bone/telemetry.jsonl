@@ -1,0 +1,2 @@
+{"task_id": "demo-001", "role": "executor", "model": "claude-sonnet-4-6", "tokens_in": 8214, "tokens_out": 1466, "iterations": 2, "wall_s": 141, "outcome": "pass", "failure_category": null, "rules_fired": []}
+{"task_id": "demo-002", "role": "executor", "model": "claude-sonnet-4-6", "tokens_in": 5210, "tokens_out": 640, "iterations": 1, "wall_s": 77, "outcome": "pass", "failure_category": null, "rules_fired": []}
