@@ -1,0 +1,5 @@
+# marrow/ is the human-cloned v0.2.0 reference (cd04dd8) — vendored by copy-in diff, never committed as a nested repo
+marrow/
+.venv/
+__pycache__/
+.pytest_cache/
