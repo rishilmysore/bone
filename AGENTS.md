@@ -1,7 +1,7 @@
-# <Project> <!-- TODO -->
+# bone
 
 <!-- marrow v0 -->
-<!-- TODO: one paragraph — what this is, who it's for, the one thing that must never break. -->
+bone is the load-bearing layer around marrow: it runs marrow-conventioned repos through supervised, evaluator-validated loops (`bone run | bench | audit | weight`) and keeps itself small by remodeling — deletion and eval-gated addition in equilibrium. For agents and their human supervisors. What must never break: the one-way dependency — bone reads marrow's files, writes only under `.bone/` in target repos; delete bone, keep marrow. Master plan: bone-plan.md; its agent brief and anti-scope lines are binding here.
 
 Agent conventions for this repo. STATE.md holds current focus; DECISIONS.md holds decision provenance; plans/ holds in-flight work, plans/archive/ closed work. This file states the current binding rules — if it disagrees with a newer DECISIONS.md line, this file is stale: fix it.
 
@@ -57,14 +57,11 @@ Quirks that cost sessions to rediscover. Update the moment you hit one.
 - History lives in git; docs describe the present. No document restates another — derive, don't copy.
 - Vendor what you adopt: no third-party skill packs at runtime — copy in, pin, review once.
 
-## Design (UI repos — delete otherwise)
-
-- Tokens: <!-- TODO: type scale, spacing unit, palette source -->
-- Bar for any shipped UI: keyboard-reachable, responsive at common widths, light + dark themes, loading/empty/error states designed, no layout shift on load.
-- Verify against rendered output: a UI-affecting change's evidence is a screenshot or rendered artifact — the agent looked at the page; where the harness cannot render, the Verify row names what stood in for eyes.
-
 ## Boundaries
 
 What agents must not do here.
 
-- <!-- TODO: e.g. never push without being asked; secrets live in X, never in code or docs; never touch generated/ -->
+- Never push without being asked.
+- `marrow/` (if present) is a read-only reference clone pinned at v0.2.0 — never edit, never commit; vendoring changes are copy-in diffs approved by the human.
+- bone-plan.md anti-scope lines are hard constraints; phase boundaries are human gates — never start the next phase in the same session.
+- Deterministic evaluators only in v0 — no LLM-as-judge anywhere in evals/.
