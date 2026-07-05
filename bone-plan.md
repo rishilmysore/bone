@@ -15,6 +15,7 @@ You are building bone in this repo, one phase per session.
 5. Commit at every green step. Git is the only persistence; if it isn't committed, it didn't happen.
 6. Anti-scope lines are hard constraints. When blocked or uncertain, write an escalation — tried / why-failed / hypothesis / one question — instead of improvising.
 7. Phase 1's real-repo bench tasks wait on repos the human supplies; use the public fixtures until then.
+8. This brief and the plan are the only process authority. Do not invoke plugin or skill-based process layers (superpowers, GSD, or similar) — built-in tools only. If the brief proves insufficient, that is a finding: escalate it, don't import process.
 
 ---
 
