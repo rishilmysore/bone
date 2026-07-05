@@ -26,25 +26,24 @@ classify → plan → execute → verify → distill (CLOSEOUT.md). Ceremony sca
 
 | Action | Command |
 |---|---|
-| Install | <!-- TODO --> |
-| Typecheck / lint | <!-- TODO --> |
-| Unit tests | <!-- TODO --> |
-| Run locally | <!-- TODO --> |
-| Build / package | <!-- TODO --> |
+| Install | `python3 -m venv .venv && .venv/bin/pip install pytest pyyaml` |
+| Lint (marrow invariants) | `sh adapters/lint.sh` |
+| Discrimination suite | `.venv/bin/python -m pytest evals/ -q` |
 
 ## Verification
 
 What constitutes **proof** that a change works. Claiming "done" requires running these and showing the output.
 
-- Fast gate (every change): <!-- TODO: e.g. `npm run typecheck && npm test` -->
-- Behavior proof (feature work): <!-- TODO: how to drive the real flow — e2e suite, smoke script, or manual steps -->
+- Fast gate (every change): `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q`
+- Behavior proof (evaluator or fixture work): green is not enough — show the suite can fail. Sabotage the changed verdict path, observe exactly its catch cases go red, restore, re-run green; paste both outputs. An evaluator that never discriminated proves nothing.
 - Evidence lands in the plan's Verify table — pasted output or a screenshot for UI — secrets redacted. A test written for this change proves it by failing before and passing after; a test that never failed proves nothing.
 
 ## Environment
 
 Quirks that cost sessions to rediscover. Update the moment you hit one.
 
-- <!-- TODO: e.g. "e2e cannot run in WSL2 — Chromium SIGTRAPs; run on CI macos-14 instead" -->
+- Ubuntu PEP-668 blocks bare `pip install` — use the repo-local `.venv` (Install row); system python3 has no pytest.
+- Git hooks are not cloned. Re-wire after a fresh clone: `printf '#!/bin/sh\nset -eu\nsh adapters/lint.sh\n.venv/bin/python -m pytest evals/ -q\n' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`
 
 ## Conventions
 

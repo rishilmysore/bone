@@ -43,7 +43,7 @@ Fixtures: F1 `pytest-exit` (passing vs failing suite) · F2 `fresh-verify-defect
 1. [x] `evals/evaluators.py` (stdlib-only: EvalResult dataclass + exit_code, diff_stats, token_count, file_exists) + `evals/conftest.py`. Env: `python3 -m venv .venv && .venv/bin/pip install pytest pyyaml`; resolved: pytest 9.1.1, PyYAML 6.0.3 (PyPI).
 2. [x] `evals/fixtures/` — F1–F5 exactly as the matrix specifies.
 3. [x] `evals/datasets/*.yaml` (4 files, 17 cases, pydantic-evals case shape) + `evals/test_discrimination.py` (YAML-driven runner + `test_acceptance_criterion` meta-test). Suite green.
-4. [ ] Wire `.git/hooks/pre-commit` (marrow-lint + suite); fill AGENTS.md Commands/Verification/Environment rows. The commit itself demonstrates the hook.
+4. [x] Wire `.git/hooks/pre-commit` (marrow-lint + suite); fill AGENTS.md Commands/Verification/Environment rows. The commit itself demonstrates the hook.
 5. [ ] Closeout per CLOSEOUT.md — archive this plan, regenerate STATE.md, ≤3 DECISIONS.md lines.
 
 ## Verify — the gate: cannot close while any row lacks evidence
