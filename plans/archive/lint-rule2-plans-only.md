@@ -27,18 +27,19 @@
 
 <!-- One atomic commit each. Record deviations inline as they happen. -->
 
-1. [ ] lint_test.sh: in section 2, (a) add case — non-plan doc, no Tasks/no Verify (e.g. `# Handoff` + prose + a `## 2 · Dispositions` heading) → `expect 0 "non-plan doc may archive — provenance docs exempt"`; (b) amend the existing `"no Verify section at all"` fixture to carry a `## Tasks` section so it stays a real plan and keeps `expect 1`. Run `sh adapters/lint_test.sh`: exactly the new case reports BAD (red) against unpatched lint.sh, all others ok — paste output. Commit.
-2. [ ] lint.sh: apply the predicate per Context sketch. `sh adapters/lint_test.sh` → all ok, 0 failing (new case flipped green; every prior case unchanged). Paste output. Commit.
-3. [ ] `git mv upgrade-handoff-2026-07.md plans/archive/`; append the DECISIONS.md divergence row (success criterion 3); regenerate STATE.md — blocker gone, v3 closeout's archival mandate now fully met, Next action → Phase 1 human gate. One commit (this is the residual v3-closeout step landing through the now-correct gate).
+1. [x] lint_test.sh: in section 2, (a) add case — non-plan doc, no Tasks/no Verify (e.g. `# Handoff` + prose + a `## 2 · Dispositions` heading) → `expect 0 "non-plan doc may archive — provenance docs exempt"`; (b) amend the existing `"no Verify section at all"` fixture to carry a `## Tasks` section so it stays a real plan and keeps `expect 1`. Run `sh adapters/lint_test.sh`: exactly the new case reports BAD (red) against unpatched lint.sh, all others ok — paste output. Commit. (ca12362)
+2. [x] lint.sh: apply the predicate per Context sketch. `sh adapters/lint_test.sh` → all ok, 0 failing (new case flipped green; every prior case unchanged). Paste output. Commit. (3d6639e)
+3. [x] `git mv upgrade-handoff-2026-07.md plans/archive/`; append the DECISIONS.md divergence row (success criterion 3); regenerate STATE.md — blocker gone, v3 closeout's archival mandate now fully met, Next action → Phase 1 human gate. One commit (this is the residual v3-closeout step landing through the now-correct gate). (fc169ab)
+   - Deviation: task-3's STATE regen named this plan's own closeout as Next action, keeping it In flight — "Next action → Phase 1 gate" beside a live In-flight entry would have contradicted itself; the closeout regen (same session) lands the literal end-state.
 
 ## Verify — the gate: cannot close while any row lacks evidence
 
 | Check | How | Evidence |
 |---|---|---|
-| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | |
-| Harness discriminates | Task 1 output: new case BAD against unpatched lint.sh; task 2 output: same case ok, `0 failing` | |
-| Gate still bites | In task 2's green run, the Tasks-without-Verify and blank-Evidence cases still `expect 1` and pass as such | |
-| Real-world proof | Pre-commit accepts task 3's archive commit; `ls plans/archive/` lists the handoff | |
+| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | 2026-07-05 post-task-3: `marrow-lint: ok`, `18 passed in 3.45s`; also run by pre-commit at ca12362, 3d6639e, fc169ab |
+| Harness discriminates | Task 1 output: new case BAD against unpatched lint.sh; task 2 output: same case ok, `0 failing` | task 1: `BAD non-plan doc may archive — provenance docs exempt — want exit 0, got 1` = the sole red, `lint-test: 26 ok, 1 failing`; task 2: same case `ok`, `lint-test: 27 ok, 0 failing` |
+| Gate still bites | In task 2's green run, the Tasks-without-Verify and blank-Evidence cases still `expect 1` and pass as such | task 2 green run: `ok Tasks but no Verify section`, `ok blank Evidence cell, trailing pipe`, `ok escaped pipe inside a cell; Evidence still blank`, `ok blank Evidence cell in a nested archive subdirectory` — all expect-1 |
+| Real-world proof | Pre-commit accepts task 3's archive commit; `ls plans/archive/` lists the handoff | fc169ab landed through the hook (`marrow-lint: ok` with handoff in plans/archive/); `ls plans/archive/` → bone-plan-v3-amendment.md, phase-0-validate-evaluators.md, upgrade-handoff-2026-07.md |
 
 ## Budget
 
