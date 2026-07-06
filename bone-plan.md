@@ -155,6 +155,8 @@ Stable public surface = `bone.toml` schema, bench task format, both JSONL schema
 | Claude Code / model churn | all platform invocation isolated in `loop/run.sh`; model strings verified at startup against docs |
 | Executor–verifier collusion | different default models per role; verifier context is read-only and fresh |
 | Public pressure to grow | the addition gate is the answer, in writing, in CONTRIBUTING |
+| Candidate selection starves — `rules_fired` logs empty in v0 | least-recently-fired is advisory only (Δ-v3); ablation attribution is deferred — revisit when two consecutive audits find candidate selection blocked or arbitrary for want of rules_fired data, and even then attribution runs only on current deletion candidates, never the full rulebook |
+| Per-audit error accumulates across release cycles | fixed-N paired protocol for now (Δ-v3); e-values/SPRT + online FDR deferred — revisit when telemetry shows audit token cost is the binding constraint, or audited-rule count makes per-audit error accumulation untenable |
 
 ---
 
