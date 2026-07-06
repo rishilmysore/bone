@@ -98,9 +98,23 @@ expect 1 "escaped pipe inside a cell; Evidence still blank"
 fresh; plan <<EOF
 # Plan: p
 
-nothing to see
+## Tasks
+
+1. [ ] the work
 EOF
-expect 1 "no Verify section at all"
+expect 1 "Tasks but no Verify section"
+fresh; plan <<EOF
+# Handoff — provenance notes
+
+Distilled dispositions; supersedes the research passes it came from.
+
+## 2 · Dispositions
+
+| # | Item | Disposition |
+|---|---|---|
+| 1 | keep | ACCEPT |
+EOF
+expect 0 "non-plan doc may archive — provenance docs exempt"
 fresh; plan <<EOF
 $VH
 EOF
