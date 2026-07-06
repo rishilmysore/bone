@@ -37,10 +37,10 @@
 
 | Check | How | Evidence |
 |---|---|---|
-| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | |
-| Traceability | For each §2 ACCEPT row, quote the amended bone-plan.md line landing it (map: 1,2,3,S→P2; 4,9→P1; 5→P3; 6,10→P5); rows 7–8 quoted as deferrals with revisit conditions | |
-| No scope drift | Diff shows anti-scope lines unmodified (except where a rider legitimately extends its own phase's spec); command surface still `run | bench | audit | weight` | |
-| Behavior | n/a — doc-only amendment; behavior-proof duty transfers to Phases 1–3 via the riders' fixture requirements (state this in the closeout, don't skip it silently) | |
+| Fast gate | `sh adapters/lint.sh && .venv/bin/python -m pytest evals/ -q` | `marrow-lint: ok`; `18 passed` (re-run green after each of the 6 task commits; pre-commit hook gated every one) |
+| Traceability | For each §2 ACCEPT row, quote the amended bone-plan.md line landing it (map: 1,2,3,S→P2; 4,9→P1; 5→P3; 6,10→P5); rows 7–8 quoted as deferrals with revisit conditions | **Row 1** (non-inferiority/paired/CIs)→P2 L118 "paired runs with and without the candidate at the same seeds, sign-flip permutation test, beta-binomial intervals; the deletion lands … only if non-inferior at the margin declared in `bone.toml`" + P1 L95 "at ≥3 seeds per task, telemetry writing per-seed outcome rows". **Row 2** (held-out split)→P2 L118 "Eval cases split visible/held-out … a deletion that passes visible but regresses held-out is restored, and the catching case rotates into the visible tier". **Row 3** (mutation adequacy)→P2 L118 "a rule is deletion-eligible only with a recorded caught-mutant … surfaced as an adequacy map by `bone audit --adequacy`". **Row S** (seeded audits)→P2 L120 "seeded-audit fixtures ship with the audit … plant a known-dead rule … and a known-load-bearing rule … sabotage→red→restore→green". **Row 4** (impossible tasks)→P1 L95 "1–2 **impossible tasks** … the `failure_category` enum gains `gamed`, and any pass on an impossible task records it and escalates". **Row 9** (provenance field)→P1 L95 "`FORMAT.md` carries a per-task provenance/validity field — origin, pinned-SHA rationale, and a public-exposure note". **Row 5** (control fixture + strip framing)→P3 L127 "verifier context carries no authorship framing … Control fixture … the executor is instructed to cheat subtly; the verifier tier must catch it". **Row 6** (judge-admission spec)→P5 L143 "pre-writes the **judge-admission bar** … alternative-annotator test … calibrated TPR/FPR … cascade". **Row 10** (ratchet citations)→P5 L143 "instruction-density citations behind the weight ratchet … ACE and IFScale, plus Curse of Instructions" (+ Session A prior-art para, commit cb2ee8d). **Rows 7–8** deferrals→risk register L165–166, each with revisit condition ("two consecutive audits find candidate selection blocked" / "audit token cost is the binding constraint"). |
+| No scope drift | Diff shows anti-scope lines unmodified (except where a rider legitimately extends its own phase's spec); command surface still `run | bench | audit | weight` | `git diff cb2ee8d..HEAD`: zero `**Anti-scope:**` constraint lines added/removed; no new dependency line; command surface line unchanged (`bin/bone … run | bench | audit | weight`); `--adequacy` appears only as a flag on `bone audit`, never as a 5th command. Edit set = bone-plan.md + DECISIONS.md + STATE.md + plan (+ handoff archive at closeout) — within budget. |
+| Behavior | n/a — doc-only amendment; behavior-proof duty transfers to Phases 1–3 via the riders' fixture requirements | Stated, not skipped: no runtime behavior changed here. The riders each carry a fixture obligation discharged in-phase — P1 impossible-task escalation, P2 seeded-audit + adequacy fixtures, P3 control-fixture cheat-catch — under the standing Phase-0 sabotage→red→restore→green duty. The plan's acceptance lines now name these so a future session cannot green the phase without them. |
 
 ## Budget
 
@@ -50,4 +50,13 @@ Stop if: a §2 row cannot land without contradicting an anti-scope line (human c
 
 Run CLOSEOUT.md. Archive upgrade-handoff-2026-07.md to plans/archive/ (its header mandates this at v3 closeout). Distilled line(s) destined for DECISIONS.md:
 
-- (drafted per task 6 from handoff §2 evidence cells; finalized here)
+- Landed as task 6: seven provenance rows (amendment header + P1/P2/P3/P5 riders + deferrals), evidence cells carrying §2 arXiv anchors with §1 corrections (STING number UNCONFIRMED → mechanism-only; Saving SWE-Bench dropped). No further closeout rows — the amendment's whole purpose was to carry this provenance forward, so it lives in DECISIONS.md, not a one-liner summary.
+
+### Decisions taken (the plan left these open; resolved 2026-07-05)
+
+- **Rider integration:** native weave into each phase's spec prose with `(Δ-v3)` cross-refs + a new `Δ v3` section — matches the v2 `Δ` convention and "docs describe the present," over a bolt-on rider block that would restate the handoff.
+- **Gate criteria:** each amended phase's *Accepts-when* line tightened to name its rider, so a future session cannot green the phase while skipping it (P1 ≥3-seed rows + impossible-task escalation; P2 paired protocol + seeded fixtures discriminate; P3 control-fixture cheat caught; P5 CONTRIBUTING carries the bar).
+- **Deferrals home:** two risk-register rows carry rows 7–8's revisit conditions inline (the register is the standing surface future sessions consult); `Δ v3` item 5 points to them rather than restating.
+- **DECISIONS granularity:** per-landing (~5 → 7 with header + deferrals), not per-§2-row (10) nor a single row; fine-grained per-disposition traceability stays in this Verify table + the archived handoff.
+
+No deviations from the task list — all six tasks landed as written, one atomic commit each, fast gate green on every commit.
