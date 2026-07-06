@@ -118,9 +118,9 @@ The supervised run loop, each mechanic shipping with its Phase-0 fixture:
 **Spin detector.** Normalize consecutive attempts' git diffs; similarity above threshold across two attempts ⇒ spin ⇒ escalate. (OpenHands' StuckDetector refined to git-diff granularity; notifies, never crashes.) Fixture: two near-identical failing attempts must trip it.
 **Caps + escalation.** Default 3 attempts per task, then a fixed-format report (`loop/escalate.md`) to `.bone/escalations/` — tried, why each failed, current hypothesis, one specific question. Budget exhaustion is treated identically to a failing check: escalate, don't push through.
 **Tripwires.** PreToolUse-hook denylist (force-push, migrations, deletes outside the worktree, external writes) pauses for a human. Supervised autonomy is these gates plus bounded sessions — never unattended overnight runs.
-**Two-tier verification.** Per-iteration: cheap deterministic checks only. Phase-exit: marrow's `fresh-verify` adapter under the verifier model.
+**Two-tier verification.** Per-iteration: cheap deterministic checks only. Phase-exit: marrow's `fresh-verify` adapter under the verifier model. The verifier context carries no authorship framing — never "your code", never the executor's transcript; lands as one line in bone's vendored `adapters/fresh-verify.md`, a deliberate, gate-approved divergence from the v0.2.0 copy (Δ-v3). Control fixture (Δ-v3): one run where the executor is instructed to cheat subtly; the verifier tier must catch it — a loop-level discrimination case beyond Δ1's planted-defect fixture.
 
-**Accepts when:** a full loop run on a bench task completes with every mechanic demonstrably firing on its fixture and telemetry rows written per role/model.
+**Accepts when:** a full loop run on a bench task completes with every mechanic demonstrably firing on its fixture — including the verifier tier catching the control-fixture cheat — and telemetry rows written per role/model.
 **Anti-scope:** no retry-strategy cleverness (backoff schedules, prompt mutation) — a retry differs only by ledger contents.
 **Joint test:** stops loops (caps, spin, budgets) and closes them (checks, fresh-verify).
 
