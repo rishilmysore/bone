@@ -29,7 +29,7 @@
 1. [x] Amend Phase 1 spec with the §3 Phase-1 rider (≥3 seeds + per-seed telemetry rows; 1–2 impossible tasks, `failure_category` gains `gamed`, any pass escalates; FORMAT.md provenance/validity field). State the blocking relation: rider lands before baselines, or baselines get re-run.
 2. [x] Amend Phase 2 spec with the §3 Phase-2 rider (paired same-seed runs, sign-flip permutation, beta-binomial intervals, declared non-inferiority margin in config — burden on the deletion; visible/held-out split with rotate-on-catch; adequacy map — deletion candidacy requires a recorded caught-mutant, least-recently-fired stays advisory until rules_fired is real; row-S seeded-audit fixtures with the Phase-0 sabotage→red→restore→green duty).
 3. [x] Amend Phase 3 spec (verifier context carries no authorship framing — one adapters/fresh-verify.md line, spec'd here, implemented in Phase 3; control fixture: executor instructed to cheat subtly, verifier tier must catch).
-4. [ ] Amend Phase 5 spec (CONTRIBUTING gains the row-6 judge-admission spec — doc-only, pre-writes the bar LLMJudge must later pass through the addition gate — and the row-10 ratchet citations).
+4. [x] Amend Phase 5 spec (CONTRIBUTING gains the row-6 judge-admission spec — doc-only, pre-writes the bar LLMJudge must later pass through the addition gate — and the row-10 ratchet citations).
 5. [ ] Record rows 7–8 as deferrals with their §4 revisit conditions where the plan already holds risk/deferral text (risk register or a Δ-v3 block) — visible to future sessions without becoming phase tasks.
 6. [ ] Mark the amendment as v3 in the doc's existing Δ convention; append DECISIONS.md provenance rows (evidence columns from handoff §2 verified-evidence cells).
 
