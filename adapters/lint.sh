@@ -24,9 +24,12 @@ fi
 
 # 2. Archived plans are evidence-complete: a Verify section with an Evidence column,
 #    at least one data row, and no blank Evidence cell (abandoned plans write `abandoned`).
+#    Gates only plan-shaped files (## Verify or ## Tasks present); non-plan provenance
+#    docs archive ungated — approved divergence from vendored marrow v0.2.0.
 find plans/archive -name '*.md' 2>/dev/null | while IFS= read -r plan; do
   msg=$(awk '
     /^## Verify/ { insec = 1; seen = 1; next }
+    /^## Tasks/  { tasks = 1 }
     /^## /       { insec = 0 }
     {
       if (!insec || $0 !~ /^\|/ || $0 ~ /^[| :-]+$/) next
@@ -37,6 +40,7 @@ find plans/archive -name '*.md' 2>/dev/null | while IFS= read -r plan; do
       if (cell[ecol] ~ /^[[:blank:]]*$/) { bad++; print "  row lacks evidence: " $0 }
     }
     END {
+      if (!seen && !tasks) exit 0
       if (!seen)      print "  no \"## Verify\" section"
       else if (!ecol) print "  Verify table missing an Evidence column"
       else if (!rows) print "  Verify table has no data rows"
