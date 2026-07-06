@@ -2,7 +2,7 @@
 
 *Marrow lives inside bone. bone is the load-bearing layer that runs marrow-conventioned projects through supervised, evaluator-validated loops — and keeps itself small by remodeling: deletion and eval-gated addition in equilibrium, driven by measured load.*
 
-**Status:** plan v2. Amends the marrow-loop plan: renamed to bone, re-baselined at marrow **v0.2.0** (tag published 2026-07-04, commit `cd04dd8`).
+**Status:** plan v3. v2 amended the marrow-loop plan: renamed to bone, re-baselined at marrow **v0.2.0** (tag published 2026-07-04, commit `cd04dd8`). v3 (2026-07-05) folds evidence-anchored phase riders into the specs — see Δ v3.
 
 ## Agent brief — read before Phase 0
 
@@ -38,6 +38,20 @@ The metaphor lives in the README. The interface stays boring: `bone run`, `bone 
 5. **Renamed throughout.** marrow-loop → bone. State dir in target repos: `.bone/`. Config: `bone.toml`. Done-check vocabulary in bench tasks may now reference v0.2.0 duty types by name (registry verification, red→green evidence, rendered-artifact evidence).
 
 No phases added, none reordered.
+
+---
+
+## Δ v3 — evidence-anchored phase riders (2026-07-05)
+
+Folds the human-confirmed dispositions of the meta-loop-accuracy research pass (archived at `plans/archive/upgrade-handoff-2026-07.md`; gate passed 2026-07-05, all ten rows) into the phase specs. Specs only — no phase begins here, no anti-scope line moves, the command surface stays `run | bench | audit | weight` (`--adequacy` is a flag on `audit`). Each landing above is tagged (Δ-v3); provenance and arXiv anchors are in DECISIONS.md and the archived handoff.
+
+1. **Phase 1** — baselines at ≥3 seeds with per-seed telemetry rows (the variance input to Phase 2's thresholds); 1–2 impossible tasks with `failure_category: gamed` + escalation on any pass; a provenance/validity field in `FORMAT.md`. **Blocking:** these land before baselines or baselines re-run.
+2. **Phase 2** — statistical deletion verdict (paired same-seed runs, sign-flip permutation, beta-binomial intervals, non-inferiority at a `bone.toml` margin, burden on the deletion); visible/held-out split with rotate-on-catch; adequacy map (`bone audit --adequacy`) requiring a recorded caught-mutant for candidacy, least-recently-fired demoted to advisory; seeded-audit fixtures under the Phase-0 sabotage→red→restore→green duty.
+3. **Phase 3** — verifier context carries no authorship framing (one line in the vendored `adapters/fresh-verify.md`); control fixture where the executor cheats subtly and the verifier tier must catch it.
+4. **Phase 5** — CONTRIBUTING pre-writes the judge-admission bar (doc-only; alternative-annotator test, calibrated TPR/FPR, cascade placement) and the instruction-density ratchet citations.
+5. **Deferred (rows 7–8)** — `rules_fired` ablation attribution and anytime-valid audits (e-values/SPRT + online FDR) stay out of v0; revisit conditions live in the risk register.
+
+Behavior-proof duty for these riders transfers to Phases 1–3 via their fixture requirements — this amendment is doc-only.
 
 ---
 

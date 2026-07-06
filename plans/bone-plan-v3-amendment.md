@@ -31,7 +31,7 @@
 3. [x] Amend Phase 3 spec (verifier context carries no authorship framing — one adapters/fresh-verify.md line, spec'd here, implemented in Phase 3; control fixture: executor instructed to cheat subtly, verifier tier must catch).
 4. [x] Amend Phase 5 spec (CONTRIBUTING gains the row-6 judge-admission spec — doc-only, pre-writes the bar LLMJudge must later pass through the addition gate — and the row-10 ratchet citations).
 5. [x] Record rows 7–8 as deferrals with their §4 revisit conditions where the plan already holds risk/deferral text (risk register or a Δ-v3 block) — visible to future sessions without becoming phase tasks.
-6. [ ] Mark the amendment as v3 in the doc's existing Δ convention; append DECISIONS.md provenance rows (evidence columns from handoff §2 verified-evidence cells).
+6. [x] Mark the amendment as v3 in the doc's existing Δ convention; append DECISIONS.md provenance rows (evidence columns from handoff §2 verified-evidence cells).
 
 ## Verify — the gate: cannot close while any row lacks evidence
 
